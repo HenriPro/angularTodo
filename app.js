@@ -1,18 +1,22 @@
 angular.module('app', [])
   .component('todoList', {
     controller: function() {
+      this.todos = [];
       this.addTodo = () => {
-        console.log(this.newTodo);
+        this.todos.push(this.newTodo);
+        this.newTodo = "";
       }
     },
     template: `
     <h1>Todo List</h1>
-    <input ng-model = "$ctrl.newTodo">
-    <button ng-click = "$ctrl.addTodo()">add</button>
+    <input ng-model="$ctrl.newTodo">
+    <button ng-click="$ctrl.addTodo()">add</button>
     <ul>
-      <li></li>
+      <li ng-repeat="todo in $ctrl.todos">
+        {{todo}}
+      </li>
     </ul>
     <hr/>
-    <pre>{{$ctrl.newTodo}}<pre>
+    <pre>{{$ctrl.todos}}<pre>
     `
   })
