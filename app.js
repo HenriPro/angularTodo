@@ -1,10 +1,17 @@
 angular.module('app', [])
   .component('todoList', {
     controller: function() {
-      this.todos = [];
+      this.todos = [
+        "Wake up",
+        "Order falafel",
+        "Eat falafel"
+      ];
       this.addTodo = () => {
         this.todos.push(this.newTodo);
         this.newTodo = "";
+      };
+      this.removeTodo = () => {
+        this.todos.pop();
       }
     },
     template: `
@@ -12,11 +19,13 @@ angular.module('app', [])
     <input ng-model="$ctrl.newTodo">
     <button ng-click="$ctrl.addTodo()">add</button>
     <ul>
-      <li ng-repeat="todo in $ctrl.todos">
+      <li
+        ng-repeat="todo in $ctrl.todos"
+        ng-click="$ctrl.removeTodo()">
         {{todo}}
       </li>
     </ul>
     <hr/>
-    <pre>{{$ctrl.todos}}<pre>
+    <pre>{{$ctrl.todos | json}}<pre>
     `
   })
