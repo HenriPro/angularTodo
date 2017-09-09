@@ -10,8 +10,8 @@ angular.module('app', [])
         this.todos.push(this.newTodo);
         this.newTodo = "";
       };
-      this.removeTodo = () => {
-        this.todos.pop();
+      this.removeTodo = (index) => {
+        this.todos.splice(index, 1);
       }
     },
     template: `
@@ -19,14 +19,24 @@ angular.module('app', [])
     <input ng-model="$ctrl.newTodo">
     <button ng-click="$ctrl.addTodo()">add</button>
     <ul>
-      <li
+      <entry
+        todo="todo"
         ng-repeat="todo in $ctrl.todos track by $index"
-        ng-click="$ctrl.removeTodo()"
-      >
-        {{todo}}
-      </li>
+        ng-click="$ctrl.removeTodo($index)"
+        />
     </ul>
     <hr/>
     <pre>{{$ctrl.todos | json}}<pre>
+    `
+  })
+  .component('entry', {
+    bindings: {
+      todo: '<'
+    },
+    template: `
+      <li
+      >
+        {{$ctrl.todo}}
+      </li>
     `
   })
