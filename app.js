@@ -20,8 +20,9 @@ angular.module('app', [])
     <button ng-click="$ctrl.addTodo()">add</button>
     <ul>
       <li
-        ng-repeat="todo in $ctrl.todos"
-        ng-click="$ctrl.removeTodo()">
+        ng-repeat="todo in $ctrl.todos track by $index"
+        ng-click="$ctrl.removeTodo()"
+      >
         {{todo}}
       </li>
     </ul>
